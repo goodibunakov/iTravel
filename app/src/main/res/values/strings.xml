@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">I-Travel</string>
+    <string name="splash_slogan">Собирай чемоданы!</string>
+    <string name="number_button_min">0</string>
+    <string name="number_button_max">20</string>
+    <string name="create_new_trip_label">Создание новой поездки</string>
+    <string name="title_delete_person">Удаление персоны</string>
+    <string name="dialog_aushure">Вы уверены?</string>
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="person_ok">Правильно сделали!</string>
+    <string name="person_delete">Так ему и надо!</string>
+    <string name="btn_create_trip">Создать поездку</string>
+    <string name="enter_country">Страна назначения</string>
+    <string name="enter_city">Населенный пункт</string>
+    <string name="title_destination_text">Место назначения</string>
+    <string name="txt_persons">Участники</string>
+    <string name="txt_type">Тип поездки</string>
+    <string name="txt_transport">Транспорт</string>
+    <string name="date_to_hint">Дата отъезда</string>
+    <string name="date_from_hint">Дата приезда</string>
+    <string name="choose_date">Выберите дату</string>
+    <string name="warning_enter_date_from">Сначала введите дату приезда</string>
+    <string name="txt_parameters">Параметры поездки</string>
+    <string name="title_dates_text">Даты поездки</string>
+    <string name="txt_type_vacation">Отпуск</string>
+    <string name="txt_type_business">Деловая</string>
+    <string-array name="transport_list">
+        <item>самолёт</item>
+        <item>поезд</item>
+        <item>автобус</item>
+        <item>корабль</item>
+        <item>автомобиль</item>
+        <item>пешком</item>
+    </string-array>
+    <string-array name="type_list">
+        <item>отпуск</item>
+        <item>деловая</item>
+    </string-array>
+    <string name="title_activity_person_edit">Участник</string>
+    <string name="txt_btn_person_edit_ok">Готово</string>
+    <string name="error_city">Сначала надо выбрать страну</string>
+    <string name="txt_sex_woman">женский</string>
+    <string name="txt_sex_man">мужской</string>
+    <string name="txt_sex">Пол</string>
+    <string name="txt_age">Возраст</string>
+    <string name="txt_name">Имя</string>
+    <string name="title_ava_dialog">Выбор аватара</string>
+    <string name="btn_ava_dialog_ok">Ок</string>
+    <string name="btn_ava_dialog_no">Отмена</string>
+    <string name="enter_name">Введите имя участника</string>
+    <string name="enter_age">Введите возраст участника</string>
+    <string name="title_activity_travel">Тут название</string>
+    <string name="tab1">первая таба</string>
+    <string name="tab2">вторая таба</string>
+    <string name="tab3">третья таба</string>
+    <string name="cant_back">Нельзя вернуться назад</string>
+
+</resources>

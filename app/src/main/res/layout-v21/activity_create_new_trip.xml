@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundLayout"
+    android:scrollbars="vertical"
+    tools:context="ru.goodibunakov.itravel.CreateNewTripActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgroundLayout"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_padding">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/colorBackground"
+                app:cardElevation="@dimen/cardview_default_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/layout_padding">
+
+                    <TextView
+                        android:id="@+id/title_destination"
+                        style="@style/text_title"
+                        android:text="@string/title_destination_text" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionThreshold="1"
+                        android:hint="@string/enter_country" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionThreshold="1"
+                        android:hint="@string/enter_city" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/colorBackground"
+                app:cardElevation="@dimen/cardview_default_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/layout_padding">
+
+                    <TextView
+                        android:id="@+id/title_dates"
+                        style="@style/text_title"
+                        android:text="@string/title_dates_text" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/date_from_textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp">
+
+                        <EditText
+                            android:id="@+id/date_from"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/date_from_hint"
+                            android:inputType="none" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/date_to_textInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/date_to"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/date_to_hint"
+                            android:inputType="date" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/colorBackground"
+                app:cardElevation="@dimen/cardview_default_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/layout_padding">
+
+                    <TextView
+                        android:id="@+id/titleTextViewTransport"
+                        style="@style/text_title"
+                        android:text="@string/txt_parameters" />
+
+                    <TextView
+                        android:id="@+id/textViewType"
+                        style="@style/text_title_min"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="@string/txt_type" />
+
+
+                    <co.ceryle.radiorealbutton.RadioRealButtonGroup
+                        android:id="@+id/type_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rrbg_animate="true"
+                        app:rrbg_animateDrawables_enter="overshoot"
+                        app:rrbg_animateDrawables_scale="1.2"
+                        app:rrbg_animateTexts_enter="overshoot"
+                        app:rrbg_animateTexts_textColorFrom="@color/colorPrimary"
+                        app:rrbg_animateTexts_textColorTo="@color/colorAccentFab"
+                        app:rrbg_borderColor="@color/colorPrimary"
+                        app:rrbg_borderSize="2dp"
+                        app:rrbg_dividerColor="@color/colorBackground"
+                        app:rrbg_dividerSize="1dp"
+                        app:rrbg_radius="5dp"
+                        app:rrbg_selectorColor="@color/colorAccentFab"
+                        app:rrbg_selectorSize="4dp">
+
+                        <co.ceryle.radiorealbutton.RadioRealButton
+                            android:id="@+id/type_vacation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:rrb_drawableGravity="right"
+                            app:rrb_drawableHeight="36dp"
+                            app:rrb_drawablePadding="8dp"
+                            app:rrb_drawableTintTo="@color/colorAccentFab"
+                            app:rrb_drawableWidth="36dp"
+                            app:rrb_ripple="true"
+                            app:rrb_rippleColor="@color/colorBackground"
+                            app:rrb_text="@string/txt_type_vacation"
+                            app:rrb_textColor="@color/colorTextDark" />
+
+                        <co.ceryle.radiorealbutton.RadioRealButton
+                            android:id="@+id/type_business"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:rrb_drawableHeight="36dp"
+                            app:rrb_drawablePadding="8dp"
+                            app:rrb_drawableTintTo="@color/colorAccentFab"
+                            app:rrb_drawableWidth="36dp"
+                            app:rrb_ripple="true"
+                            app:rrb_rippleColor="@color/colorBackground"
+                            app:rrb_text="@string/txt_type_business"
+                            app:rrb_textColor="@color/colorTextDark" />
+                    </co.ceryle.radiorealbutton.RadioRealButtonGroup>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewTransport"
+                            style="@style/text_title_min"
+                            android:paddingTop="8dp"
+                            android:text="@string/txt_transport" />
+
+                        <co.ceryle.radiorealbutton.RadioRealButtonGroup
+                            android:id="@+id/transport_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:rrbg_animate="true"
+                            app:rrbg_animateDrawables_enter="overshoot"
+                            app:rrbg_animateDrawables_scale="1.2"
+                            app:rrbg_animateTexts_enter="overshoot"
+                            app:rrbg_dividerColor="@color/colorBackground"
+                            app:rrbg_dividerSize="1dp"
+                            app:rrbg_enableDeselection="true"
+                            app:rrbg_radius="5dp"
+                            app:rrbg_selectorColor="@color/colorAccentFab"
+                            app:rrbg_selectorSize="4dp">
+
+                            <co.ceryle.radiorealbutton.RadioRealButton
+                                android:id="@+id/transport_bus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:rrb_drawable="@drawable/tr_bus"
+                                app:rrb_drawableHeight="36dp"
+                                app:rrb_drawablePadding="8dp"
+                                app:rrb_drawableTintTo="@color/colorAccentFab"
+                                app:rrb_drawableWidth="36dp"
+                                app:rrb_ripple="true"
+                                app:rrb_rippleColor="@color/colorBackground"
+                                app:rrb_textColor="@color/colorTextDark" />
+
+                            <co.ceryle.radiorealbutton.RadioRealButton
+                                android:id="@+id/transport_car"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:rrb_drawable="@drawable/tr_car"
+                                app:rrb_drawableGravity="right"
+                                app:rrb_drawableHeight="36dp"
+                                app:rrb_drawablePadding="8dp"
+                                app:rrb_drawableTintTo="@color/colorAccentFab"
+                                app:rrb_drawableWidth="36dp"
+                                app:rrb_ripple="true"
+                                app:rrb_rippleColor="@color/colorBackground"
+                                app:rrb_textColor="@color/colorTextDark" />
+
+                            <co.ceryle.radiorealbutton.RadioRealButton
+                                android:id="@+id/transport_plain"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:rrb_drawable="@drawable/tr_plain"
+                                app:rrb_drawableGravity="right"
+                                app:rrb_drawableHeight="36dp"
+                                app:rrb_drawablePadding="8dp"
+                                app:rrb_drawableTintTo="@color/colorAccentFab"
+                                app:rrb_drawableWidth="36dp"
+                                app:rrb_ripple="true"
+                                app:rrb_rippleColor="@color/colorBackground"
+                                app:rrb_textColor="@color/colorTextDark" />
+
+                            <co.ceryle.radiorealbutton.RadioRealButton
+                                android:id="@+id/transport_ship"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:rrb_drawable="@drawable/tr_ship"
+                                app:rrb_drawableGravity="right"
+                                app:rrb_drawableHeight="36dp"
+                                app:rrb_drawablePadding="8dp"
+                                app:rrb_drawableTintTo="@color/colorAccentFab"
+                                app:rrb_drawableWidth="36dp"
+                                app:rrb_ripple="true"
+                                app:rrb_rippleColor="@color/colorBackground"
+                                app:rrb_textColor="@color/colorTextDark" />
+
+                            <co.ceryle.radiorealbutton.RadioRealButton
+                                android:id="@+id/transport_train"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:rrb_drawable="@drawable/tr_train"
+                                app:rrb_drawableGravity="right"
+                                app:rrb_drawableHeight="36dp"
+                                app:rrb_drawablePadding="8dp"
+                                app:rrb_drawableTintTo="@color/colorAccentFab"
+                                app:rrb_drawableWidth="36dp"
+                                app:rrb_ripple="true"
+                                app:rrb_rippleColor="@color/colorBackground"
+                                app:rrb_textColor="@color/colorTextDark" />
+
+                            <co.ceryle.radiorealbutton.RadioRealButton
+                                android:id="@+id/transport_nogami"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:rrb_drawable="@drawable/tr_nogami"
+                                app:rrb_drawableGravity="right"
+                                app:rrb_drawableHeight="36dp"
+                                app:rrb_drawablePadding="8dp"
+                                app:rrb_drawableTintTo="@color/colorAccentFab"
+                                app:rrb_drawableWidth="36dp"
+                                app:rrb_ripple="true"
+                                app:rrb_rippleColor="@color/colorBackground"
+                                app:rrb_textColor="@color/colorTextDark" />
+
+                        </co.ceryle.radiorealbutton.RadioRealButtonGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/colorBackground"
+                app:cardElevation="@dimen/cardview_default_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/layout_padding">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/layout_padding"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:paddingTop="@dimen/layout_padding">
+
+                        <TextView
+                            android:id="@+id/textViewPersons"
+                            style="@style/text_title"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
+                            android:text="@string/txt_persons"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                            android:id="@+id/elegant_number_button"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="8dp"
+                            app:backGroundColor="@color/colorPrimaryDark"
+                            app:finalNumber="@string/number_button_max"
+                            app:initialNumber="@string/number_button_min"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:textSize="@dimen/text_body" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/person_list"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/layout_padding"
+                            android:scrollbars="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/elegant_number_button" />
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_create_trip"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:layout_marginRight="@dimen/layout_padding"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/btn_create_trip_selector"
+                android:text="@string/btn_create_trip"
+                android:textColor="@color/colorWhite"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <safety.com.br.progressimageview.ProgressImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/progress_image_view"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/i_travel_logo_progressbar"
+        android:visibility="invisible"
+        android:fillAfter="true"/>
+
+</FrameLayout>

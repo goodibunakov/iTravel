@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="colorPrimary">#388E3C</color>
+<color name="colorPrimaryDark">#1B5E20</color>
+<color name="colorPrimaryLight">#81C784</color>
+<color name="colorAccent">#fe5722</color>
+<color name="colorAccentFab">#f05321</color>
+<color name="colorBackground">#fcfcfc</color>
+<color name="colorTextLight">#757575</color>
+<color name="colorTextDark">#212121</color>
+<color name="colorDivider">#BDBDBD</color>
+<color name="colorBackgroundCard">#e1e1e1</color>
+<color name="colorWhite">#FFFFFF</color>
+<color name="colorBackgroundLayout">#CACACA</color>
+</resources>
+
+<!--<resources>-->
+<!--<color name="colorPrimary">#5c8aea</color>-->
+<!--<color name="colorPrimaryDark">#345499</color>-->
+<!--<color name="colorAccent">#ff6e40</color>-->
+<!--<color name="colorAccentFab">#f05321</color>-->
+<!--<color name="colorBackground">#fcfcfc</color>-->
+<!--<color name="colorTextLight">#adb2bf</color>-->
+<!--<color name="colorTextDark">#3e4148</color>-->
+<!--<color name="colorBackgroundCard">#e1e1e1</color>-->
+<!--<color name="colorWhite">#FFFFFF</color>-->
+<!--<color name="colorBackgroundLayout">#cacaca</color>-->
+<!--</resources>-->
+
+<!--<resources>-->
+<!--<color name="colorPrimary">#607d8b</color>-->
+<!--<color name="colorPrimaryDark">#465a65</color>-->
+<!--<color name="colorAccent">#fe5722</color>-->
+<!--<color name="colorAccentFab">#f05321</color>-->
+<!--<color name="colorBackground">#fcfcfc</color>-->
+<!--<color name="colorTextLight">#757575</color>-->
+<!--<color name="colorTextDark">#212121</color>-->
+<!--<color name="colorDivider">#BDBDBD</color>-->
+<!--<color name="colorBackgroundCard">#e1e1e1</color>-->
+<!--<color name="colorWhite">#FFFFFF</color>-->
+<!--<color name="colorBackgroundLayout">#CACACA</color>-->
+<!--</resources>-->
