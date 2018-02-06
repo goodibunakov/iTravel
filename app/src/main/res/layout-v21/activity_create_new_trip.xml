@@ -33,24 +33,17 @@
                     android:padding="@dimen/layout_padding">
 
                     <TextView
-                        android:id="@+id/title_destination"
+                        android:id="@+id/title_place"
                         style="@style/text_title"
                         android:text="@string/title_destination_text" />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/country"
+                    <fragment
+                        android:id="@+id/place_autocomplete_fragment"
+                        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:completionThreshold="1"
-                        android:hint="@string/enter_country" />
-
-                    <AutoCompleteTextView
-                        android:id="@+id/city"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:completionThreshold="1"
-                        android:hint="@string/enter_city" />
-
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

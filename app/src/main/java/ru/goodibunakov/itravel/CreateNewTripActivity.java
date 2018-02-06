@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -19,8 +20,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,11 +27,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,6 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import co.ceryle.radiorealbutton.RadioRealButton;
@@ -52,7 +59,7 @@ public class CreateNewTripActivity extends AppCompatActivity implements View.OnF
     private DatePickerDialog chooseDate;
     AlertDialog.Builder ad;
     private EditText dateFrom, dateTo;
-    DataBaseDestinationHelper dataBaseDestinationHelper;
+    DataBaseGoodsHelper dataBaseGoodsHelper;
     AutoCompleteTextView autoCompleteTextViewCountry;
     AutoCompleteTextView autoCompleteTextViewCity;
     String chosenCountry;
@@ -88,29 +95,48 @@ public class CreateNewTripActivity extends AppCompatActivity implements View.OnF
         createTrip = (Button) findViewById(R.id.btn_create_trip);
 
         //ключ для гугл мест  AIzaSyCofVMoBolQ2zFk-weJio8DCqJ8Vr2BkBc
-        autoCompleteTextViewCountry = (AutoCompleteTextView) findViewById(R.id.country);
-        autoCompleteTextViewCity = (AutoCompleteTextView) findViewById(R.id.city);
+        final PlaceAutocompleteFragment places = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
+                .build();
+        places.setFilter(typeFilter);
+        places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                LatLng coordinates = place.getLatLng(); // Получаем координаты из объекта place
+                Geocoder geocoder = new Geocoder(CreateNewTripActivity.this, Locale.getDefault());
+                List<Address> addresses = null;
+                try {
+                    addresses = geocoder.getFromLocation(
+                            coordinates.latitude,
+                            coordinates.longitude,
+                            1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (!addresses.isEmpty()) {
+                    Address address = addresses.get(0);
+                    Log.i("code", address.getCountryCode());
+                }
+
+                Toast.makeText(getApplicationContext(), place.getAddress(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateNewTripActivity.this, place.getLatLng().latitude + " " + place.getLatLng().longitude, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Status status) {
+                Toast.makeText(getApplicationContext(), status.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         dateFrom = (EditText) findViewById(R.id.date_from);
         dateFrom.setOnFocusChangeListener(this);
         dateTo = (EditText) findViewById(R.id.date_to);
         dateTo.setOnFocusChangeListener(this);
 
-        dataBaseDestinationHelper = new DataBaseDestinationHelper(this);
-        ArrayList<String> allCountries = dataBaseDestinationHelper.getAllCountries();
-        ArrayAdapter<String> adapterAllCountries = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, allCountries);
-        autoCompleteTextViewCountry.setAdapter(adapterAllCountries);
-        autoCompleteTextViewCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                autoCompleteTextViewCity.getText().clear();
-                chosenCountry = autoCompleteTextViewCountry.getText().toString();
-                ArrayList<String> neededCities = dataBaseDestinationHelper.getNeededCities(chosenCountry);
-                ArrayAdapter<String> adapterNeededCities = new ArrayAdapter<String>(CreateNewTripActivity.this, android.R.layout.simple_dropdown_item_1line, neededCities);
-                autoCompleteTextViewCity.setAdapter(adapterNeededCities);
-            }
-        });
-        autoCompleteTextViewCountry.setOnFocusChangeListener(this);
-        autoCompleteTextViewCity.setOnFocusChangeListener(this);
+        dataBaseGoodsHelper = new DataBaseGoodsHelper(this);
 
         final RadioRealButton btnBus = (RadioRealButton) findViewById(R.id.transport_bus);
         final RadioRealButton btnCar = (RadioRealButton) findViewById(R.id.transport_car);
@@ -136,6 +162,7 @@ public class CreateNewTripActivity extends AppCompatActivity implements View.OnF
             }
         });
 
+        numberButton.animate();
         numberButton.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
@@ -144,25 +171,26 @@ public class CreateNewTripActivity extends AppCompatActivity implements View.OnF
                     Intent newPerson = new Intent(CreateNewTripActivity.this, PersonEditActivity.class);
                     startActivityForResult(newPerson, 0);
                 } else {
+                    view.setNumber(String.valueOf(oldValue));
                     //Удаляем
-                    ad = new AlertDialog.Builder(CreateNewTripActivity.this);
-                    ad.setTitle(getResources().getString(R.string.title_delete_person));  // заголовок
-                    ad.setMessage(getResources().getString(R.string.dialog_aushure)); // сообщение
-                    ad.setPositiveButton(getResources().getString(R.string.button_ok), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int arg1) {
-                            Toast.makeText(CreateNewTripActivity.this, getResources().getString(R.string.person_delete),
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    ad.setNegativeButton(getResources().getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int arg1) {
-                            Toast.makeText(CreateNewTripActivity.this, getResources().getString(R.string.person_ok), Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
-                    ad.setCancelable(false);
-                    ad.show();
+//                    ad = new AlertDialog.Builder(CreateNewTripActivity.this);
+//                    ad.setTitle(getResources().getString(R.string.title_delete_person));  // заголовок
+//                    ad.setMessage(getResources().getString(R.string.dialog_aushure)); // сообщение
+//                    ad.setPositiveButton(getResources().getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int arg1) {
+//                            Toast.makeText(CreateNewTripActivity.this, getResources().getString(R.string.person_delete),
+//                                    Toast.LENGTH_LONG).show();
+//                        }
+//                    });
+//                    ad.setNegativeButton(getResources().getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int arg1) {
+//                            Toast.makeText(CreateNewTripActivity.this, getResources().getString(R.string.person_ok), Toast.LENGTH_LONG)
+//                                    .show();
+//                        }
+//                    });
+//                    ad.setCancelable(false);
+//                    ad.show();
                 }
             }
         });
@@ -173,6 +201,18 @@ public class CreateNewTripActivity extends AppCompatActivity implements View.OnF
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.create_new_trip_activity, menu);
         return true;
+    }
+
+    void setCountryFlag(String countryCode) {
+        switch (countryCode) {
+            case "RU":
+                //int flag = getResources().getIdentifier("flag_ru", "drawable", YourActivity.this.getPackageName());
+                break;
+            case "UA":
+                //int flag = getResources().getIdentifier("R.id.flag_ru");
+                break;
+            default: //int flag = getResources().getIdentifier("R.id.flag_empty");
+        }
     }
 
     //инициализация диалога выбора даты
@@ -224,21 +264,6 @@ public class CreateNewTripActivity extends AppCompatActivity implements View.OnF
     @Override
     public void onFocusChange(View view, boolean hasFocus) {
         switch (view.getId()) {
-            case R.id.country:
-                if (hasFocus) {
-                    if (autoCompleteTextViewCountry.length() > 0) {
-                        autoCompleteTextViewCountry.getText().clear();
-                        autoCompleteTextViewCity.getText().clear();
-                    }
-                }
-                break;
-            case R.id.city:
-                if (hasFocus) {
-                    if (autoCompleteTextViewCountry.length() == 0) {
-                        autoCompleteTextViewCity.setError(getResources().getString(R.string.error_city));
-                    }
-                }
-                break;
             case R.id.date_from:
             case R.id.date_to:
                 try {
@@ -267,7 +292,7 @@ public class CreateNewTripActivity extends AppCompatActivity implements View.OnF
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dataBaseDestinationHelper.close();
+        dataBaseGoodsHelper.close();
     }
 
     @Override

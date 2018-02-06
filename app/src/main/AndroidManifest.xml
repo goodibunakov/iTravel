@@ -10,6 +10,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDWvlSXOj4HBMHV05ps1Hsl1yWgnO7zrGM" />
         <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait"
@@ -46,7 +49,7 @@
                 android:value="ru.goodibunakov.itravel.CreateNewTripActivity" />
         </activity>
 
-        <service android:name=".MyDestinationService" />
+        <service android:name=".GoodsService" />
     </application>
 
 </manifest>

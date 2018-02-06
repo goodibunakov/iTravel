@@ -20,7 +20,7 @@ public class SplashScreen extends AwesomeSplash {
     @Override
     public void initSplash(ConfigSplash configSplash) {
 
-        startService(new Intent(this, MyDestinationService.class));
+        startService(new Intent(this, GoodsService.class));
 
 			/* you don't have to override every property */
 

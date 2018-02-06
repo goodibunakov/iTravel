@@ -42,5 +42,6 @@ dependencies {
     compile 'com.android.support:support-v4:26.1.0'
     compile 'com.android.support:support-v13:26.1.0'
     compile 'com.github.safetysystemtechnology:progress-image-view-android:v1.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
     testCompile 'junit:junit:4.12'
 }
