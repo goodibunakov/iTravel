@@ -10,7 +10,7 @@
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="ru.goodibunakov.iremember.TravelActivity">
+        tools:context="ru.goodibunakov.itravel.TravelActivity">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
